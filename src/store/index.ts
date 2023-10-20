@@ -13,7 +13,7 @@ type State = {
 
 const useStore = create<State>((set) => ({
     editedTask: { id: 0, title: '' },
-    updateEditedTask: (payload) => 
+    updateEditedTask: (payload) =>
     set({
         editedTask: payload,
     }),
