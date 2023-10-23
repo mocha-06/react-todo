@@ -49,4 +49,32 @@ export const useMutateTask = () => {
       },
     }
   )
+  const deleteTaskMutation = useMutation(
+    (id: number) =>
+      axios.delete(`${process.env.REACT_APP_API_URL}/tasks/${id}`),
+    {
+      onSuccess: (_, variables) => {
+        const previousTasks = queryClient.getQueryData<Task[]>(['tasks'])
+        if (previousTasks) {
+          queryClient.setQueryData<Task[]>(
+            ['tasks'],
+            previousTasks.filter((task) => task.id !== variables)
+          )
+        }
+        resetEditedTask()
+      },
+      onError: (err: any) => {
+        if (err.response.data.message) {
+          switchErrorHandling(err.response.data.message)
+        } else {
+          switchErrorHandling(err.response.data)
+        }
+      },
+    }
+  )
+  return {
+    createTaskMutation,
+    updateTaskMutation,
+    deleteTaskMutation,
+  }
 }
