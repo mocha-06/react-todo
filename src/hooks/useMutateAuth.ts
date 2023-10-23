@@ -5,8 +5,11 @@ import useStore from "../store"
 import { Credential } from "../types"
 import { useError } from "./useError"
 
+// 認証関連の操作
 export const useMutateAuth = () => {
+    // ページへのナビゲーション
     const navigate = useNavigate()
+    // 編集中のタスク情報のresetに使用
     const resetEditedTask = useStore((state) => state.resetEditedTask)
     const { switchErrorHandling } = useError()
     const loginMutation = useMutation(
