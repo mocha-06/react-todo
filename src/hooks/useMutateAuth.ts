@@ -10,8 +10,8 @@ export const useMutateAuth = () => {
     const resetEditedTask = useStore((state) => state.resetEditedTask)
     const { switchErrorHandling } = useError()
     const loginMutation = useMutation(
-        async (user: Credential) => 
-          await axios.post(`${process.env.REACT_APP_API_URL}/login`, user),
+        async (user: Credential) =>
+            await axios.post(`${process.env.REACT_APP_API_URL}/login`, user),
         {
             onSuccess: () => {
                 navigate('/todo')
@@ -27,7 +27,7 @@ export const useMutateAuth = () => {
     )
     const registerMutation = useMutation(
         async (user: Credential) =>
-           await axios.post(`${process.env.REACT_APP_API_URL}/signup`, user),
+            await axios.post(`${process.env.REACT_APP_API_URL}/signup`, user),
         {
             onError: (err: any) => {
                 if (err.response.data.message) {
