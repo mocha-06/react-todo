@@ -53,7 +53,7 @@ export const Auth = () => {
         </div>
         <div>
           <input
-            className="mb-3 px-3 text-sm py--2 border border-gray-300"
+            className="mb-3 px-3 text-sm py-2 border border-gray-300"
             type="password"
             name="password"
             placeholder="Password"
