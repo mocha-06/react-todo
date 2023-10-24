@@ -14,7 +14,7 @@ export const useMutateTask = () => {
       axios.post<Task>(`${process.env.REACT_APP_API_URL}/tasks`, task),
     {
       onSuccess: (res) => {
-        const previousTasks = queryClient.getQueriesData<Task[]>(['tasks'])
+        const previousTasks = queryClient.getQueryData<Task[]>(['tasks'])
         if (previousTasks) {
           queryClient.setQueryData(['tasks'], [...previousTasks, res.data])
         }
@@ -38,7 +38,7 @@ export const useMutateTask = () => {
       onSuccess: (res, variables) => {
         const previousTasks = queryClient.getQueryData<Task[]>(['tasks'])
         if (previousTasks) {
-          queryClient.setQueriesData<Task[]>(
+          queryClient.setQueryData<Task[]>(
             ['tasks'],
             previousTasks.map((task) =>
               task.id === variables.id ? res.data : task
@@ -46,6 +46,13 @@ export const useMutateTask = () => {
           )
         }
         resetEditedTask()
+      },
+      onError: (err: any) => {
+        if (err.response.data.message) {
+          switchErrorHandling(err.response.data.message)
+        } else {
+          switchErrorHandling(err.response.data)
+        }
       },
     }
   )
