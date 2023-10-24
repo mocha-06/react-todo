@@ -8,7 +8,7 @@ const TaskItemMemo: FC<Omit<Task, 'created_at' | 'updated_at'>> = ({
     id,
     title,
 }) => {
-    const updaTask = useStore((state) => state.updateEditedTask)
+    const updateTask = useStore((state) => state.updateEditedTask)
     const { deleteTaskMutation } = useMutateTask()
     return (
     <li className="my-3">
@@ -17,7 +17,7 @@ const TaskItemMemo: FC<Omit<Task, 'created_at' | 'updated_at'>> = ({
             <PencilIcon
                 className="h-5 w-5 mx-1 text-blue-500 cursor-pointer"
                 onClick={() => {
-                    updaTask({
+                    updateTask({
                         id: id,
                         title: title,
                     })
